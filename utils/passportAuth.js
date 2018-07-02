@@ -14,7 +14,11 @@ module.exports = async (req, res, next) => {
         res.send({ 'status': false, 'message': err.message });
       }
       // generate a signed son web token with the contents of user object and return it in the response
-      const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET, { expiresIn: process.env.tokenExpTime});
+      const token = jwt.sign(
+        { id: user._id }, 
+        process.env.SECRET, 
+        { expiresIn: process.env.tokenExpTime}
+      );
       return res.status(200).send({
         status: true,
         user: {
@@ -25,6 +29,8 @@ module.exports = async (req, res, next) => {
         },
         token
       });
+
     });
+
   })(req, res, next);
 }
