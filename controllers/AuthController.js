@@ -47,7 +47,7 @@ class AuthController {
     }
   }
 
-  async logout(req, res) {
+  logout(req, res) {
     console.log('User:', req.user);
     req.logout();
     res.json({

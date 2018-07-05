@@ -31,12 +31,23 @@ app.use('/', indexRouter);
 app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
+// error handlers
+app.use((err, req, res, next) => {
+  if (req.xhr) {
+    res.status(err.status || 500);
+    return res.send({
+      status: false,
+      message: err.message || "Something went wrong!"
+    });
+  } else {
+    return next(err);
+  }
+});
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
