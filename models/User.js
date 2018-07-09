@@ -3,29 +3,41 @@ const mongoose = require('mongoose'),
   passportMongoose = require('passport-local-mongoose');
 
 const UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
+  firstName: {
+      type: String,
+      required: true   
+  },
+  lastName: {
+      type: String,
+      required: true   
+  },
   email: { 
     type: String, 
-    required: true 
+    required: true ,
+    unique: true
   },
-  username: { 
-    type: String, 
-    required: true, 
-    index: { unique: true } 
-  },
+  client_ip: String,
+  user_agent: String,
   password: String,
   last_login: {
-    type: Date,
-    default: Date.now
+    type: Date
   }
 }, {
     timestamps: true
 });
-UserSchema.statics.login = (id, callback) => {
-  return this.findByIdAndUpdate(id, { $set: { 'last_login': Date.now() }}, { new: true }, callback);
+UserSchema.methods.addLastLogin = function(obj, callback) {
+  return this.model('User').findByIdAndUpdate(this.id, { $set: { 
+      'last_login': Date('2016-08-18'),
+      'client_ip': obj.client_ip,
+      'user_agent': obj.user_agent
+     }}, { new: true }, callback);
 };
-//UserSchema.index({ email: 1, username: 1 }, { unique: true });
-UserSchema.plugin(passportMongoose);
+const options = { 
+    usernameField: 'email',
+    errorMessages: {
+        UserExistsError: "A user with the given username/email-ID is already registered."
+    }
+};
+UserSchema.plugin(passportMongoose, options);
 
 module.exports = mongoose.model('User', UserSchema);
