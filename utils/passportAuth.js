@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
             let client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
             let user_agent = req.headers['user-agent'];
             user.addLastLogin({ user_agent, client_ip }, function(err, userNew) {
-                if (!!userNew) {
+                if (userNew) {
                     user = userNew;
                 }
             });
@@ -42,4 +42,4 @@ module.exports = async (req, res, next) => {
         });
 
     })(req, res, next);
-}
+};
