@@ -16,6 +16,15 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
+    role: {
+        type: String,
+        enum: ['ADMIN', 'USER'],
+        default: 'USER'
+    },
+    active: {
+        type: Boolean,
+        default: true
+    },
     client_ip: String,
     user_agent: String,
     password: String,
@@ -38,6 +47,10 @@ const options = {
     usernameField: 'email',
     errorMessages: {
         UserExistsError: "A user with the given username/email-ID is already registered."
+    },
+    findByUsername: function (model, queryParameters) {
+        queryParameters.active = true;
+        return model.findOne(queryParameters);
     }
 };
 UserSchema.plugin(passportMongoose, options);

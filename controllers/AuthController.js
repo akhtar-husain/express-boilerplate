@@ -32,6 +32,7 @@ class AuthController {
 
     async login(req, res, next) {
         try {
+            //return res.json(req.body);
             if (!req.body.email || !req.body.password) {
                 return res.status(400).json({
                     status: false,

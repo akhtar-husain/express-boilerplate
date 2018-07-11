@@ -1,0 +1,7 @@
+.login-box-body, .register-box-body {float: left;width: 100%;}
+#alerts {margin-top: 20px;}
+label.required:after {content: ' *';color: #dd4b39;}
+.box-7 {width:70%;margin: auto;}
+.select2-container {width: 100% !important;}
+li.paginate_button.active > a {background: #00a65a !important;border-color: #008d4c !important;}
+.pagination>.active>span {background-color: #58a75b;border-color: #498e4d;}

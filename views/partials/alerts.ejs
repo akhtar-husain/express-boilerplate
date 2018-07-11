@@ -1,0 +1,8 @@
+<% if(messages.message) { %>
+<div id="alerts">
+    <div class="alert alert-dismissable <%= 'alert-' + messages.status %>">
+        <%= messages.message %>
+		<button class="close" role="close" data-dismiss="alert">&times;</button>
+	</div>
+</div>
+<% } %>

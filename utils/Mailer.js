@@ -1,6 +1,6 @@
 const path = require('path');
 const nodemailer = require('nodemailer');
-const EmailTemplate = require('email-templates');
+// const EmailTemplate = require('email-templates');
 
 class Mailer {
     constructor(options) {
@@ -22,11 +22,11 @@ class Mailer {
                 }
             }); */
             const transporter = nodemailer.createTransport(process.env.MAIL_STRING);
-            const sendResetPasswordLink = await transporter.templateSender(
+            /* const sendResetPasswordLink = await transporter.templateSender(
                 new EmailTemplate(this.templatePath), {
                     from: process.env.MAIL_FROM,
-                });
-            /* await transporter.sendMail({
+                }); */
+            await transporter.sendMail({
                 to: this.to,
                 subject: this.subject,
                 text: 'Hello world!',
@@ -39,8 +39,8 @@ class Mailer {
                     console.log('info', info);
                     return Promise.resolve(info);
                 }
-            }); */
-            await sendResetPasswordLink({
+            });
+            /* await sendResetPasswordLink({
                 to: this.to,
                 subject: this.subject,
                 from: process.env.MAIL_FROM
@@ -53,7 +53,7 @@ class Mailer {
                 } else {
                     return Promise.resolve(info);
                 }
-            });
+            }); */
         } catch (err) {
             return Promise.reject(err);
         }
