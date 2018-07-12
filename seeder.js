@@ -8,7 +8,7 @@ UserModel.register(new UserModel({
     lastName: 'Admin',
     role: 'ADMIN'
 }),
-'123456',
+'Admin@321',
 (err) => {
     if (err) {
         console.error(err);

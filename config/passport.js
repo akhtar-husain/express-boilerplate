@@ -2,7 +2,6 @@ const User = require('../models/User');
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
-//const passport = require('passport');
 
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -14,6 +13,14 @@ module.exports = (passport) => {
     },
     User.authenticate()
     ));
+    // web login for admin
+    passport.use('local-login', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        session: true
+    },
+    User.authenticate()
+    )); 
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
 

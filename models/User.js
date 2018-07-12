@@ -37,7 +37,6 @@ const UserSchema = new Schema({
 UserSchema.methods.addLastLogin = function (obj, callback) {
     return this.model('User').findByIdAndUpdate(this.id, {
         $set: {
-            'last_login': Date('2016-08-18'),
             'client_ip': obj.client_ip,
             'user_agent': obj.user_agent
         }
@@ -51,7 +50,8 @@ const options = {
     findByUsername: function (model, queryParameters) {
         queryParameters.active = true;
         return model.findOne(queryParameters);
-    }
+    },
+    lastLoginField: 'last_login'
 };
 UserSchema.plugin(passportMongoose, options);
 

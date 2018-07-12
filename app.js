@@ -20,10 +20,6 @@ app.locals = require('./config/local');
 require('dotenv').config();
 require('./config/db')();
 
-// Setup passport
-app.use(passport.initialize());
-require('./config/passport')(passport);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -50,6 +46,11 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+
+// Setup passport
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
 
 // Setup routes.
 app.use('/', webRouter);

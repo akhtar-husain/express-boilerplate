@@ -25,7 +25,6 @@ module.exports = async (req, res, next) => {
                 process.env.SECRET,
                 { expiresIn: process.env.tokenExpTime }
             );
-            console.log('User: ', user);
             return res.status(200).send({
                 status: true,
                 user: {

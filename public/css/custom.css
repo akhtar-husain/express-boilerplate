@@ -5,3 +5,5 @@ label.required:after {content: ' *';color: #dd4b39;}
 .select2-container {width: 100% !important;}
 li.paginate_button.active > a {background: #00a65a !important;border-color: #008d4c !important;}
 .pagination>.active>span {background-color: #58a75b;border-color: #498e4d;}
+.skin-black .main-header .navbar, .skin-black .main-header>.logo {background: #b8c6c9;}
+.form-group{position: relative;}

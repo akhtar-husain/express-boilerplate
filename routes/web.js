@@ -4,9 +4,9 @@ const authRouter = require('./web/auth');
 
 const authMiddleware = require('../utils/auth');
 
-/* GET home page. */
-router.get('/', authMiddleware.isAuthenticated, function (req, res, next) {
-    res.render('index', { title: 'Express' });
+/* GET home page. , authMiddleware.isAdmin */
+router.get('/', authMiddleware.isAdmin, function (req, res, next) {
+    res.render('index', { title: '', user: req.user });
 });
 
 router.use('/auth', authRouter);
